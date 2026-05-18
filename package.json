@@ -1,0 +1,76 @@
+{
+  "name": "next-intl-merge",
+  "version": "0.1.0",
+  "description": "Next.js plugin that merges per-package locale JSON files into one <locale>.json per language. Works under Webpack and Turbopack. CLI included.",
+  "keywords": [
+    "next",
+    "nextjs",
+    "next-intl",
+    "i18n",
+    "locale",
+    "messages",
+    "merge",
+    "webpack",
+    "turbopack",
+    "plugin",
+    "cli"
+  ],
+  "license": "MIT",
+  "author": "sedlukha",
+  "homepage": "https://github.com/sedlukha/next-intl-merge#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sedlukha/next-intl-merge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sedlukha/next-intl-merge/issues"
+  },
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "default": "./dist/src/index.js"
+    }
+  },
+  "bin": {
+    "next-intl-merge": "./dist/bin/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json && node scripts/post-build.js",
+    "dev": "tsx bin/cli.ts",
+    "start": "node dist/bin/cli.js",
+    "test": "tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "dependencies": {
+    "json-tree-merge": "^0.1.0"
+  },
+  "peerDependencies": {
+    "next": ">=14",
+    "webpack": ">=5"
+  },
+  "peerDependenciesMeta": {
+    "webpack": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "next": "^15.0.0",
+    "rimraf": "^6.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0",
+    "webpack": "^5.94.0"
+  }
+}

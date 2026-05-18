@@ -1,0 +1,9 @@
+src
+bin
+test
+scripts
+tsconfig.json
+tsconfig.build.json
+.gitignore
+.github
+*.tgz
