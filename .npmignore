@@ -1,6 +1,6 @@
 src
-bin
 test
+tests
 scripts
 tsconfig.json
 tsconfig.build.json

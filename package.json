@@ -26,16 +26,16 @@
     "url": "https://github.com/sedlukha/next-intl-merge/issues"
   },
   "type": "module",
-  "main": "./dist/src/index.js",
-  "types": "./dist/src/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/src/index.d.ts",
-      "default": "./dist/src/index.js"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
   "bin": {
-    "next-intl-merge": "./dist/bin/cli.js"
+    "next-intl-merge": "./dist/cli/index.js"
   },
   "files": [
     "dist",
@@ -47,8 +47,8 @@
   },
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json && node scripts/post-build.js",
-    "dev": "tsx bin/cli.ts",
-    "start": "node dist/bin/cli.js",
+    "dev": "tsx src/cli/index.ts",
+    "start": "node dist/cli/index.js",
     "test": "tsx --test test/*.test.ts",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build && npm test"

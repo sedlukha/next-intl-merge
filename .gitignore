@@ -1,13 +1,13 @@
 node_modules
 dist
+coverage
 .DS_Store
 *.log
 .env
 .env.local
-coverage
 .idea
 .vscode
 *.tgz
-package-lock.json
-yarn.lock
+*.tsbuildinfo
 pnpm-lock.yaml
+yarn.lock

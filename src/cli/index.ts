@@ -4,7 +4,7 @@ import { parseArgs } from "node:util"
 
 import { createLogger, mergeJsonTree } from "json-tree-merge"
 
-import { loadConfig } from "../src/utils/load-config.js"
+import { loadConfig } from "../utils/load-config.js"
 
 const LOG_PREFIX = "[NextIntlMerge]"
 
@@ -31,7 +31,6 @@ Examples:
 `
 
 const readVersion = (): string => {
-  // dist/bin/cli.js → climb two levels to package root
   const url = new URL("../../package.json", import.meta.url)
   const raw = fs.readFileSync(url, "utf-8")
 

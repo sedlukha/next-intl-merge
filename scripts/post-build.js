@@ -4,7 +4,7 @@ import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const binFile = resolve(__dirname, "..", "dist", "bin", "cli.js")
+const binFile = resolve(__dirname, "..", "dist", "cli", "index.js")
 
 if (existsSync(binFile)) {
   chmodSync(binFile, 0o755)
