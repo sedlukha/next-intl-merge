@@ -8,3 +8,6 @@ coverage
 .idea
 .vscode
 *.tgz
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

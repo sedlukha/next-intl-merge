@@ -7,7 +7,9 @@ import { afterEach, beforeEach, describe, it } from "node:test"
 import { loadConfig } from "../src/utils/load-config.js"
 
 const makeTempDir = (): string =>
-  fs.mkdtempSync(path.join(os.tmpdir(), "next-intl-merge-test-"))
+  fs.realpathSync(
+    fs.mkdtempSync(path.join(os.tmpdir(), "next-intl-merge-test-"))
+  )
 
 const writeFile = (filePath: string, content: string): void => {
   fs.mkdirSync(path.dirname(filePath), { recursive: true })

@@ -7,7 +7,9 @@ import { afterEach, beforeEach, describe, it } from "node:test"
 import { assertNoTranslateLocaleOverlap } from "../src/utils/assert-no-translate-locale-overlap.js"
 
 const makeTempDir = (): string =>
-  fs.mkdtempSync(path.join(os.tmpdir(), "next-intl-merge-overlap-test-"))
+  fs.realpathSync(
+    fs.mkdtempSync(path.join(os.tmpdir(), "next-intl-merge-overlap-test-"))
+  )
 
 describe("assertNoTranslateLocaleOverlap", () => {
   let tmpRoot: string
