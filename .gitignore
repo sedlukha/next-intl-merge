@@ -11,3 +11,4 @@ coverage
 *.tsbuildinfo
 pnpm-lock.yaml
 yarn.lock
+CLAUDE.md
