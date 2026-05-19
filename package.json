@@ -51,7 +51,7 @@
     "start": "node dist/cli/index.js",
     "test": "tsx --test test/*.test.ts",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build && npm test"
+    "prepublishOnly": "pnpm run build && pnpm test"
   },
   "dependencies": {
     "json-tree-merge": "^0.1.1"
@@ -72,5 +72,6 @@
     "tsx": "^4.19.0",
     "typescript": "^5.5.0",
     "webpack": "^5.94.0"
-  }
+  },
+  "packageManager": "pnpm@10.27.0"
 }
