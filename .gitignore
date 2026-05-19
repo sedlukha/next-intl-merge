@@ -12,3 +12,5 @@ coverage
 pnpm-lock.yaml
 yarn.lock
 CLAUDE.md
+.workmux
+.workmux.yaml
