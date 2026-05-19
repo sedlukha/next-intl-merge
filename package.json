@@ -54,7 +54,7 @@
     "prepublishOnly": "npm run build && npm test"
   },
   "dependencies": {
-    "json-tree-merge": "^0.1.0"
+    "json-tree-merge": "0.1.1"
   },
   "peerDependencies": {
     "next": ">=14",
