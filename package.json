@@ -73,5 +73,11 @@
     "typescript": "^5.5.0",
     "webpack": "^5.94.0"
   },
-  "packageManager": "pnpm@10.27.0"
+  "packageManager": "pnpm@10.27.0",
+  "pnpm": {
+    "supportedArchitectures": {
+      "os": ["darwin", "linux"],
+      "cpu": ["arm64", "x64"]
+    }
+  }
 }
