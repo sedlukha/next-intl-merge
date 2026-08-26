@@ -189,6 +189,7 @@ next-intl-merge [options]
 | Flag              | Alias | Required | Default                          | Description                            |
 | ----------------- | ----- | -------- | -------------------------------- | -------------------------------------- |
 | `--config <path>` | `-c`  | no       | `./next-intl-merge.config.json`  | Path to the config file.               |
+| `--check`         | —     | no       | —                                | Compare the committed output. Writes nothing. |
 | `--help`          | `-h`  | no       | —                                | Show usage.                            |
 | `--version`       | `-v`  | no       | —                                | Print version.                         |
 
@@ -198,13 +199,52 @@ Use cases for the CLI:
 - One-shot regeneration after a manual `git pull`.
 - Scripts that run outside the dev server.
 
+### `--check`: catch a stale committed file
+
+Most projects commit the merged `<locale>.json` files. A build regenerates them, so the app always works. Only the copy in the repository goes stale.
+
+Someone edits a source `messages/en.json` inside one package and does not run the merge. The commit then carries a stale merged file, and nothing fails. Later a teammate takes the branch, and `t("new.key")` is missing or red by types. They look for the reason in their own code, and it sits in another person's commit.
+
+`--check` is that missing guard:
+
+```bash
+next-intl-merge --check
+```
+
+It merges into a temporary folder, compares each file it just built with the file of the same name in `outputPath`, and removes the temporary folder. `outputPath` is never written, so the command is safe to run at any time. Put it in a `check` script, a pre-commit hook, or a CI job.
+
+```
+$ next-intl-merge --check
+[NextIntlMerge] Stale merged files:
+  /repo/packages/messages/src/en.json
+[NextIntlMerge] Run `next-intl-merge` and commit them.
+```
+
+**It compares only the files this tool writes.** `outputPath` often holds files another tool owns: a translated locale, a vocabulary file, or the `en.d.json.ts` type declaration that next-intl writes through `createMessagesDeclaration`. Those are left alone and never reported.
+
+So `--check` does not see a stale type declaration. Let one script write both, and the two files always move together:
+
+```json
+{
+  "scripts": {
+    "i18n:merge": "next-intl-merge && next typegen",
+    "check:messages": "next-intl-merge --check"
+  }
+}
+```
+
+Two cases that could look like a pass, and do not:
+
+- **The merge builds nothing.** Two empty folders compare equal, so no difference would be found. The command fails instead and says so.
+- **`outputPath` lacks a file the merge built.** That is a difference, so the file is reported.
+
 ### Exit codes
 
-| Code | Meaning                                             |
-| ---- | --------------------------------------------------- |
-| `0`  | Success.                                            |
-| `1`  | Runtime error (I/O, invalid JSON in a locale file). |
-| `2`  | Invalid CLI usage or missing/invalid configuration. |
+| Code | Meaning                                                               |
+| ---- | --------------------------------------------------------------------- |
+| `0`  | Success. With `--check`, every merged file matches its source files.   |
+| `1`  | Runtime error (I/O, invalid JSON in a locale file), or `--check` found a stale file. |
+| `2`  | Invalid CLI usage or missing/invalid configuration.                   |
 
 ## Atomic writes
 
